@@ -1,5 +1,5 @@
 """
-Builds the CL'AP double-walled glass cup and exports it for the website.
+Builds the Clap Cafe double-walled glass cup and exports it for the website.
 
 Run (from the project root):
   /Applications/Blender.app/Contents/MacOS/Blender --background --python scripts/blender/cup.py

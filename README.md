@@ -1,6 +1,6 @@
-# CL'AP Cafe website
+# Clap Cafe website
 
-A one-page site for CL'AP Cafe (Singapore). The hero is a double-walled glass cup, modelled in
+A one-page site for Clap Cafe (Singapore). The hero is a double-walled glass cup, modelled in
 Blender, that you scroll through: it tips toward you, pours, and the latte rises to become the
 drinks menu. Below that: Cakes, Find us (map, hours, directions) and a footer.
 
