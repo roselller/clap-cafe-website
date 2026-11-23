@@ -1,0 +1,109 @@
+{
+  "name": "CLAP",
+  "tagline": "Coffee & cakes, freshly baked by the owner daily.",
+  "location": {
+    "building": "Waterloo Centre",
+    "street": "Waterloo St, #01-28",
+    "city": "Singapore",
+    "postalCode": "180261",
+    "mapsUrl": "https://maps.app.goo.gl/c3GCXzACNgURCBsb7"
+  },
+  "phone": "+65 9180 8301",
+  "instagram": "clapcafe.sg",
+  "timezone": "Asia/Singapore",
+  "hours": {
+    "mon": ["08:30", "19:00"],
+    "tue": ["08:30", "19:00"],
+    "wed": ["08:30", "19:00"],
+    "thu": ["08:30", "19:00"],
+    "fri": ["08:30", "19:00"],
+    "sat": ["08:30", "19:00"],
+    "sun": ["08:30", "19:00"]
+  },
+  "drinks": {
+    "notes": ["All coffee is a double shot", "Oat milk +$0.50", "Lactose-free milk available"],
+    "sections": [
+      {
+        "id": "black-white",
+        "title": "Black & White",
+        "items": [
+          { "name": "Espresso", "hot": 5.0, "iced": null },
+          { "name": "Long Black", "hot": 5.0, "iced": 5.5 },
+          { "name": "Americano", "hot": 5.0, "iced": 5.5 },
+          { "name": "Latte", "hot": 6.0, "iced": 6.5 },
+          { "name": "Flat White", "hot": 6.0, "iced": 6.5 },
+          { "name": "Cappuccino", "hot": 6.0, "iced": 6.5 },
+          { "name": "Piccolo", "hot": 6.0, "iced": null },
+          { "name": "Macchiato", "hot": 6.0, "iced": 6.5 },
+          { "name": "Mocha Latte", "hot": 7.0, "iced": 7.5 },
+          { "name": "Vanilla Latte", "hot": 7.0, "iced": 7.5 },
+          { "name": "Toffee Nut Latte", "hot": 7.0, "iced": 7.5 },
+          { "name": "Caramel Latte", "hot": 7.0, "iced": 7.5 },
+          { "name": "Hazelnut Latte", "hot": 7.0, "iced": 7.5 },
+          { "name": "Affogato", "price": 8.0 },
+          { "name": "Crème Brûlée Latte", "hot": 7.0, "iced": null, "note": "Hot only" }
+        ]
+      },
+      {
+        "id": "signature",
+        "title": "Signature",
+        "items": [
+          { "name": "Dirty Moscow", "hot": null, "iced": 10.0 },
+          { "name": "Tiramisu Latte", "hot": null, "iced": 10.0 },
+          { "name": "Sea Salt Latte", "hot": null, "iced": 8.5 },
+          { "name": "Cinnamon Latte", "hot": 8.0, "iced": 8.5 },
+          { "name": "Osmanthus Latte", "hot": 8.0, "iced": 8.5 },
+          { "name": "Hojicha Latte", "hot": 7.0, "iced": 7.5 },
+          { "name": "Matcha Latte", "hot": 7.0, "iced": 7.5 },
+          { "name": "Pumpkin Latte", "hot": 8.0, "iced": 8.5, "note": "Seasonal" },
+          { "name": "Double Chocolate", "hot": 8.0, "iced": 8.5 }
+        ]
+      },
+      {
+        "id": "fizzy",
+        "title": "Fizzy",
+        "description": "Fresh fruit and sparkling water",
+        "items": [
+          { "name": "Ceylon Peach", "price": 9.0 },
+          { "name": "Orange Ginger", "price": 9.0 },
+          { "name": "Green Tea Lime", "price": 9.0 },
+          { "name": "Lemon Lime Bitters", "price": 9.0 }
+        ]
+      },
+      {
+        "id": "tea",
+        "title": "Tea",
+        "items": [
+          { "name": "Green Tea", "price": 6.0 },
+          { "name": "Black Tea", "price": 7.0 },
+          { "name": "White Tea", "price": 8.0 },
+          { "name": "Flower Tea", "price": 7.0, "verify": "price partly hidden on the menu board" }
+        ]
+      }
+    ]
+  },
+  "food": {
+    "cakes": {
+      "description": "Freshly baked by the owner daily",
+      "items": [
+        { "name": "Basque Cheese", "price": 8.0 },
+        { "name": "Maple Pecan", "price": 9.0 },
+        { "name": "English Lemon Gateau", "price": 9.0 },
+        { "name": "Espresso Tiramisu", "price": 12.0 },
+        { "name": "Red Velvet", "price": 8.0 },
+        { "name": "Matcha Red Bean", "price": 8.0 },
+        { "name": "Earl Grey Lavender", "price": 8.0 },
+        { "name": "Blackout Chocolate", "price": 8.0 },
+        { "name": "Raspberry Lychee Rose", "price": 8.0, "verify": "seen on a display-case card, not on the menu board" }
+      ]
+    },
+    "warmCakes": [
+      { "name": "Molten Chocolate", "price": 12.0 },
+      { "name": "Sticky Date Cake", "price": 12.0 }
+    ],
+    "iceCream": { "flavours": ["Vanilla", "Chocolate"], "single": 2.5, "double": 4.5 },
+    "sandwiches": [
+      { "name": "Chicken Ham & Cheese", "price": 5.8, "note": "Homemade", "verify": "price read from a blurry photo" }
+    ]
+  }
+}

@@ -1,0 +1,434 @@
+@import "tailwindcss";
+
+/* ───────── Design tokens ───────── */
+@theme {
+  --color-milk: #f5f0e9;
+  --color-espresso: #2a1a12;
+  --color-case: #2b1a11; /* Cakes section and its display case: one dark brown */
+  --color-case-base: #1b100a; /* the darker bar under the case */
+  --color-led: #fff6e5;
+  --color-board: #c49563;
+  --color-card: #faf5ec;
+  --color-glass-pink: #ec7e91;
+  --color-pink-light: #f7b9c2;
+  --color-pink-tile: #d85f76;
+
+  --font-display: var(--font-arvo), Georgia, serif;
+  --font-sans: var(--font-sniglet), ui-rounded, system-ui, sans-serif;
+  --font-hand: var(--font-sniglet), ui-rounded, system-ui, sans-serif;
+}
+
+/* ───────── Colours of the fixed (light) theme ─────────
+   Light cream page, light latte. These were the "hot" values of the old hot/cold switch,
+   which is gone; the names are kept so the components that use them did not change. */
+:root {
+  --liquid: #d9b98f;
+  --liquid-ink: #2a1a12;
+  --liquid-ink-2: #5e3e2b;
+  --liquid-line: rgb(42 26 18 / 0.35);
+  --page-bg: #f5f0e9;
+  --page-ink: #2a1a12;
+  --page-ink-2: #5f5249;
+  --btn-bg: #2a1a12;
+  --btn-ink: #f5f0e9;
+  --map-bg: #e6dfd5;
+}
+
+@theme inline {
+  --color-latte: var(--liquid);
+  --color-liquid-ink: var(--liquid-ink);
+  --color-latte-ink: var(--liquid-ink-2);
+}
+
+html {
+  background: var(--color-milk);
+  color: var(--color-espresso);
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-synthesis: none; /* Sniglet ships one weight: never fake a bold */
+  font-family: var(--font-sans);
+  background: var(--color-milk);
+  min-height: 100svh;
+}
+
+/* ───────── Hero: static by default, animated only when the head script
+   adds html.js-motion (JS on + reduced-motion off). ───────── */
+
+.hero-track {
+  position: relative;
+}
+
+.hero-stage {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4svh 24px 14svh;
+  background: var(--color-milk);
+}
+
+html.js-motion .hero-track {
+  height: 356svh; /* see LATTE_AT in PourStage.tsx */
+}
+
+html.js-motion .hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 0;
+}
+
+/* Scroll is locked only while the loader plays; the head script also
+   removes this class after a failsafe timeout. */
+html.js-loader {
+  overflow: hidden;
+}
+
+.hero-center {
+  --cup: clamp(150px, 17vw, 250px);
+  --u: calc(var(--cup) / 200); /* one SVG viewBox unit, in px */
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(28px, 6svh, 64px);
+  top: -9svh; /* the resting cup sits a little above centre; the pour measures from here */
+}
+
+/* The cup tips toward the viewer around the centre of its rim. */
+.cup {
+  position: relative;
+  width: var(--cup);
+  height: calc(260 * var(--u));
+  transform-origin: 50% 15.4%;
+}
+
+.cup > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.cup svg * {
+  transform-box: view-box;
+}
+
+.cup-body,
+.cup-rim,
+.cup-coffee {
+  transform-origin: 100px 40px;
+}
+
+.cup-rim {
+  transform: scaleY(0.19);
+}
+
+.cup-coffee,
+.wave path,
+.static-wave path {
+  fill: var(--liquid);
+}
+
+.cup-label {
+  font-family: var(--font-sniglet), ui-rounded, system-ui, sans-serif;
+  font-weight: 400;
+}
+
+/* Scroll pour: the liquid spilling over the front lip. It is one SVG path that PourStage
+   redraws while you scroll (see drawStream): it leaves the latte's outline, pulls in along a
+   soft curve to a fixed-width column and ends in a round U. Scrolling only changes how far
+   it hangs, never its width. It sits in front of the cup (z-index 2) and starts inside the
+   latte, so its flat top edge disappears into the same colour.
+   The window is 140u wide, centred on the cup (30u in from the cup box edge). Its top is 43u
+   below the box top; the path's own y = 0 is the lip, 48u below the rim centre.
+   (The SVG sits inside a span so the `.cup > svg` rules, which size the cup art, skip it.) */
+.pour-stream {
+  position: absolute;
+  z-index: 2;
+  left: calc(30 * var(--u));
+  top: calc(43 * var(--u)); /* the path's y = 0 is the lip, 88u down: see PourStage */
+  width: calc(140 * var(--u));
+  height: 130svh;
+  overflow: visible;
+  display: none;
+  pointer-events: none;
+}
+
+html.js-motion .pour-stream {
+  display: block;
+}
+
+.pour-stream svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.pour-stream path {
+  fill: var(--liquid);
+}
+
+.cup > svg {
+  z-index: 1;
+}
+
+/* Desktop 3D cup (components/hero/cup3d.ts). The canvas is a 400u square centred on the
+   rim centre (100u, 40u), so every stream offset above stays valid. It stays hidden
+   until the model has loaded; the SVG cup is the fallback. */
+.cup-canvas {
+  position: absolute;
+  z-index: 1;
+  left: calc(-100 * var(--u));
+  top: calc(-160 * var(--u));
+  width: calc(400 * var(--u));
+  height: calc(400 * var(--u));
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.cup--3d .cup-canvas {
+  visibility: visible;
+}
+
+.cup--3d > svg {
+  display: none;
+}
+
+/* The 3D cup is twice the size of the SVG one. Only its box changes: the rim stays at
+   (100u, 40u), so the streams and the tip pivot keep working in `u`. */
+.hero-center:has(.cup--3d) {
+  --cup: clamp(300px, 34vw, 500px);
+}
+
+.cup--3d {
+  height: calc(200 * var(--u));
+  transform-origin: 50% calc(40 * var(--u));
+}
+
+/* The latte that rises and fills the screen */
+.latte {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  background: var(--color-latte);
+  display: none;
+}
+
+html.js-motion .latte {
+  display: block;
+  transform: translateY(115%);
+}
+
+[data-pouring] .latte,
+[data-pouring] .cup {
+  will-change: transform;
+}
+
+.wave {
+  position: absolute;
+  left: 0;
+  width: 200%;
+  height: 12svh;
+  bottom: calc(100% - 1px);
+}
+
+.wave svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Scroll hint */
+.hero-hint {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  /* sits above the dock */
+  bottom: calc(env(safe-area-inset-bottom) + 112px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #5e3e2b; /* sits on the cream page, so it stays dark */
+  pointer-events: none;
+}
+
+/* Static (no-motion) latte edge at the bottom of the hero */
+.static-wave {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 10svh;
+}
+
+html.js-motion .static-wave {
+  display: none;
+}
+
+html:not(.js-motion) .hero-hint {
+  display: none;
+}
+
+/* The menu slides up over the last stretch of the pour so there is no empty
+   latte-coloured screen between the wave and the menu. */
+html.js-motion #drinks {
+  position: relative;
+  z-index: 10;
+  margin-top: calc(-100svh + 120px);
+}
+
+/* ───────── Loader gating: hidden until the intro timeline reveals them ───────── */
+html.js-loader .cup,
+html.js-loader .hero-hint {
+  opacity: 0;
+}
+
+html.js-loader .cup-coffee {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* ───────── Reduced motion: never animate, never lock, show the static state ───────── */
+@media (prefers-reduced-motion: reduce) {
+  html.js-loader {
+    overflow: auto;
+  }
+}
+
+/* ───────── Fixed UI (the dock): appears when the loader ends ───────── */
+.ui-chrome {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+html.js-loader .ui-chrome {
+  opacity: 0;
+  transform: translateY(24px);
+  pointer-events: none;
+}
+
+/* ───────── Drinks ───────── */
+.drink-leader {
+  flex: 1;
+  min-width: 12px;
+  border-bottom: 2px dotted var(--liquid-line);
+  transform: translateY(-5px);
+}
+
+.price-pair {
+  display: inline-grid;
+  grid-template-columns: 5rem 1.4rem 5.6rem;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.price-pair > span:first-child {
+  text-align: right;
+}
+
+.price-pair > span:last-child {
+  text-align: left;
+}
+
+.price-slash {
+  text-align: center !important;
+  color: var(--liquid-ink-2);
+}
+
+.price-pair small {
+  font-size: 0.72em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--liquid-ink-2);
+}
+
+@media (max-width: 480px) {
+  .price-pair {
+    grid-template-columns: 4.4rem 1.2rem 4.9rem;
+    font-size: 17px;
+  }
+}
+
+.drink-tag {
+  font-family: var(--font-sniglet), ui-rounded, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--liquid-ink-2);
+}
+
+/* ───────── Cake counter ───────── */
+.dome {
+  transition: transform 0.4s ease;
+}
+
+.cake-btn[aria-pressed="true"] .dome {
+  transform: translateY(-34%);
+}
+
+@media (hover: hover) {
+  .cake-btn:hover .dome {
+    transform: translateY(-34%);
+  }
+}
+
+.cake-btn:focus-visible {
+  outline: 2px solid var(--color-led);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+/* ───────── Dock ───────── */
+.dock-link {
+  position: relative;
+  display: block;
+  border-radius: 16px;
+}
+
+.dock-tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: var(--color-espresso);
+  color: var(--color-milk);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.dock-link:hover .dock-tip,
+.dock-link:focus-visible .dock-tip {
+  opacity: 1;
+}
+
+.dock-link:focus-visible {
+  outline: 2px solid var(--color-espresso);
+  outline-offset: 3px;
+}
+
+/* ───────── Footer: the pink at the bottom of the ribbed glass ───────── */
+.footer-glass {
+  background-color: var(--color-glass-pink);
+  background-image:
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.13) 0 5px, transparent 5px 13px),
+    linear-gradient(180deg, var(--color-pink-light) 0%, var(--color-glass-pink) 78%);
+}
