@@ -27,7 +27,10 @@ export function LazyMap({ query, title }: { query: string; title: string }) {
   }, []);
 
   return (
-    <div ref={ref} className="relative min-h-[360px] overflow-hidden rounded-2xl bg-[var(--map-bg)] md:min-h-[520px]">
+    <div
+      ref={ref}
+      className="relative min-h-[360px] overflow-hidden rounded-2xl border border-white/15 bg-case-base shadow-[0_16px_44px_rgb(0_0_0/0.35)] md:min-h-[520px]"
+    >
       {show ? (
         <iframe
           title={title}
@@ -37,7 +40,7 @@ export function LazyMap({ query, title }: { query: string; title: string }) {
           className="absolute inset-0 h-full w-full border-0"
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center gap-3 text-[var(--page-ink)]">
+        <div className="absolute inset-0 flex items-center justify-center gap-3 text-milk">
           <svg width="32" height="42" viewBox="0 0 28 36" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" aria-hidden="true">
             <path d="M14 34S3 22 3 13a11 11 0 0 1 22 0c0 9-11 21-11 21z" fill="#ec7e91" />
             <circle cx="14" cy="13" r="4" fill="#fff" />

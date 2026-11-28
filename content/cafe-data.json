@@ -1,6 +1,6 @@
 {
   "name": "CLAP",
-  "tagline": "Coffee & cakes, freshly baked by the owner daily.",
+  "tagline": "Coffee & cakes.",
   "location": {
     "building": "Waterloo Centre",
     "street": "Waterloo St, #01-28",
@@ -84,26 +84,175 @@
   },
   "food": {
     "cakes": {
-      "description": "Freshly baked by the owner daily",
       "items": [
-        { "name": "Basque Cheese", "price": 8.0 },
-        { "name": "Maple Pecan", "price": 9.0 },
-        { "name": "English Lemon Gateau", "price": 9.0 },
-        { "name": "Espresso Tiramisu", "price": 12.0 },
-        { "name": "Red Velvet", "price": 8.0 },
-        { "name": "Matcha Red Bean", "price": 8.0 },
-        { "name": "Earl Grey Lavender", "price": 8.0 },
-        { "name": "Blackout Chocolate", "price": 8.0 },
-        { "name": "Raspberry Lychee Rose", "price": 8.0, "verify": "seen on a display-case card, not on the menu board" }
+        {
+          "name": "Basque Cheese",
+          "price": 8.0,
+          "image": "/images/cakes/basque-cheese.png",
+          "badge": "House Favourite",
+          "tagline": "Deeply caramelised burnt crust giving way to a custardy, melt-in-the-mouth centre.",
+          "layersNote": "Scorched Basque top · Velvety baked cream cheese centre",
+          "flavours": ["Creamy", "Caramelised", "Rich"],
+          "profile": { "sweetness": 3, "richness": 5 },
+          "allergens": ["Dairy", "Eggs"],
+          "pairing": {
+            "drink": "Long Black",
+            "note": "Crisp roasted bitterness cuts cleanly through the burnt-sugar richness."
+          }
+        },
+        {
+          "name": "Maple Pecan",
+          "price": 9.0,
+          "image": "/images/cakes/maple-pecan.png",
+          "tagline": "Toasted pecans folded through golden sponge and finished with a warm amber maple glaze.",
+          "layersNote": "Candied pecans · Amber maple drizzle · Brown-butter sponge",
+          "flavours": ["Nutty", "Maple", "Warm Spice"],
+          "profile": { "sweetness": 4, "richness": 4 },
+          "allergens": ["Tree Nuts", "Dairy", "Eggs", "Gluten"],
+          "pairing": {
+            "drink": "Flat White",
+            "note": "Silky steamed milk echoes the toasty caramel notes of roasted pecan."
+          }
+        },
+        {
+          "name": "English Lemon Gateau",
+          "price": 9.0,
+          "image": "/images/cakes/english-lemon-gateau.png",
+          "tagline": "Bright, zesty lemon curd layered between tender butter sponge and whipped cream.",
+          "layersNote": "Candied lemon slices · Tangy lemon glaze · Light citrus sponge",
+          "flavours": ["Zesty", "Bright", "Light"],
+          "profile": { "sweetness": 3, "richness": 2 },
+          "allergens": ["Dairy", "Eggs", "Gluten"],
+          "pairing": {
+            "drink": "Ceylon Peach",
+            "note": "Sparkling peach and crisp Ceylon tea lift the fresh citrus finish."
+          }
+        },
+        {
+          "name": "Espresso Tiramisu",
+          "price": 12.0,
+          "image": "/images/cakes/espresso-tiramisu.png",
+          "badge": "Owner's Pick",
+          "tagline": "House-pulled espresso soaked sponge layered with cloud-like mascarpone and dark cocoa.",
+          "layersNote": "Dutch cocoa dusting · Whipped mascarpone · Espresso-soaked sponge",
+          "flavours": ["Coffee", "Mascarpone", "Cocoa"],
+          "profile": { "sweetness": 3, "richness": 4 },
+          "allergens": ["Dairy", "Eggs", "Gluten", "Caffeine"],
+          "pairing": {
+            "drink": "Espresso",
+            "note": "Doubles down on the roasted espresso crema for true coffee lovers."
+          }
+        },
+        {
+          "name": "Red Velvet",
+          "price": 8.0,
+          "image": "/images/cakes/red-velvet.png",
+          "tagline": "Soft cocoa-kissed crimson crumb paired with lightly tangy whipped cream cheese frosting.",
+          "layersNote": "Cream cheese swirls · Crimson cocoa sponge · Velvet crumb",
+          "flavours": ["Cocoa", "Tangy Cream", "Velvety"],
+          "profile": { "sweetness": 4, "richness": 3 },
+          "allergens": ["Dairy", "Eggs", "Gluten"],
+          "pairing": {
+            "drink": "Latte",
+            "note": "Smooth, rounded milk coffee balances the gentle cocoa and tangy frosting."
+          }
+        },
+        {
+          "name": "Matcha Red Bean",
+          "price": 8.0,
+          "image": "/images/cakes/matcha-red-bean.png",
+          "tagline": "Fragrant ceremonial matcha chiffon layered with tender sweet azuki red bean and fresh cream.",
+          "layersNote": "Matcha-dusted cream · Matcha chiffon · Sweet azuki bean layer",
+          "flavours": ["Earthy Matcha", "Azuki", "Soft"],
+          "profile": { "sweetness": 2, "richness": 3 },
+          "allergens": ["Dairy", "Eggs", "Gluten", "Caffeine"],
+          "pairing": {
+            "drink": "Hojicha Latte",
+            "note": "Roasted green tea complements matcha's grassy depth and earthy azuki."
+          }
+        },
+        {
+          "name": "Earl Grey Lavender",
+          "price": 8.0,
+          "image": "/images/cakes/earl-grey-lavender.png",
+          "tagline": "Bergamot-infused sponge speckled with tea leaves and wrapped in delicate lavender cream.",
+          "layersNote": "Fresh lavender sprigs · Lilac cream · Bergamot tea-flecked sponge",
+          "flavours": ["Bergamot", "Floral", "Fragrant"],
+          "profile": { "sweetness": 2, "richness": 2 },
+          "allergens": ["Dairy", "Eggs", "Gluten", "Caffeine"],
+          "pairing": {
+            "drink": "White Tea",
+            "note": "Soft, honeyed white tea lets the bergamot and lavender aromatics shine."
+          }
+        },
+        {
+          "name": "Blackout Chocolate",
+          "price": 8.0,
+          "image": "/images/cakes/blackout-chocolate.png",
+          "tagline": "Deep, fudgy dark chocolate layers cloaked in glossy ganache and rich cocoa crumb.",
+          "layersNote": "Dark chocolate crumb · Glossy dark ganache · Moist fudge sponge",
+          "flavours": ["Dark Cocoa", "Fudge", "Decadent"],
+          "profile": { "sweetness": 4, "richness": 5 },
+          "allergens": ["Dairy", "Eggs", "Gluten"],
+          "pairing": {
+            "drink": "Americano",
+            "note": "Clean, bright black coffee refreshes the palate between fudgy bites."
+          }
+        },
+        {
+          "name": "Raspberry Lychee Rose",
+          "price": 8.0,
+          "image": "/images/cakes/raspberry-lychee-rose.png",
+          "verify": "seen on a display-case card, not on the menu board",
+          "tagline": "Airy vanilla sponge layered with rosewater cream, juicy lychee, and tart ruby raspberries.",
+          "layersNote": "Fresh raspberries, lychee & rose petals · Rosewater buttercream",
+          "flavours": ["Fruity", "Floral", "Delicate"],
+          "profile": { "sweetness": 3, "richness": 2 },
+          "allergens": ["Dairy", "Eggs", "Gluten"],
+          "pairing": {
+            "drink": "Flower Tea",
+            "note": "Aromatic blossoms mirror the rosewater and bright berry tang."
+          }
+        }
       ]
     },
     "warmCakes": [
-      { "name": "Molten Chocolate", "price": 12.0 },
-      { "name": "Sticky Date Cake", "price": 12.0 }
+      {
+        "name": "Molten Chocolate",
+        "price": 12.0,
+        "badge": "Served Warm",
+        "tagline": "Baked to order with a crisp cocoa crust and warm flowing dark chocolate centre.",
+        "allergens": ["Dairy", "Eggs", "Gluten"],
+        "pairing": {
+          "drink": "Flat White",
+          "note": "Best enjoyed warm with a cold scoop of vanilla ice cream."
+        }
+      },
+      {
+        "name": "Sticky Date Cake",
+        "price": 12.0,
+        "badge": "Served Warm",
+        "tagline": "Tender caramelised date pudding soaked in warm house butterscotch sauce.",
+        "allergens": ["Dairy", "Eggs", "Gluten"],
+        "pairing": {
+          "drink": "Long Black",
+          "note": "Warm toffee sweetness melts right into a cold scoop of ice cream."
+        }
+      }
     ],
-    "iceCream": { "flavours": ["Vanilla", "Chocolate"], "single": 2.5, "double": 4.5 },
+    "iceCream": {
+      "flavours": ["Vanilla", "Chocolate"],
+      "single": 2.5,
+      "double": 4.5
+    },
     "sandwiches": [
-      { "name": "Chicken Ham & Cheese", "price": 5.8, "note": "Homemade", "verify": "price read from a blurry photo" }
+      {
+        "name": "Chicken Ham & Cheese",
+        "price": 5.8,
+        "note": "Homemade",
+        "tagline": "Warm toasted sandwich layered with savoury chicken ham and melted cheese.",
+        "verify": "price read from a blurry photo"
+      }
     ]
   }
 }

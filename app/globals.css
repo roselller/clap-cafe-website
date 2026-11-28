@@ -4,10 +4,9 @@
 @theme {
   --color-milk: #f5f0e9;
   --color-espresso: #2a1a12;
-  --color-case: #2b1a11; /* Cakes section and its display case: one dark brown */
-  --color-case-base: #1b100a; /* the darker bar under the case */
+  --color-case: #2b1a11;
+  --color-case-base: #1b100a;
   --color-led: #fff6e5;
-  --color-board: #c49563;
   --color-card: #faf5ec;
   --color-glass-pink: #ec7e91;
   --color-pink-light: #f7b9c2;
@@ -26,12 +25,6 @@
   --liquid-ink: #2a1a12;
   --liquid-ink-2: #5e3e2b;
   --liquid-line: rgb(42 26 18 / 0.35);
-  --page-bg: #f5f0e9;
-  --page-ink: #2a1a12;
-  --page-ink-2: #5f5249;
-  --btn-bg: #2a1a12;
-  --btn-ink: #f5f0e9;
-  --map-bg: #e6dfd5;
 }
 
 @theme inline {
@@ -370,25 +363,70 @@ html.js-loader .ui-chrome {
   color: var(--liquid-ink-2);
 }
 
-/* ───────── Cake counter ───────── */
-.dome {
-  transition: transform 0.4s ease;
-}
-
-.cake-btn[aria-pressed="true"] .dome {
-  transform: translateY(-34%);
-}
-
-@media (hover: hover) {
-  .cake-btn:hover .dome {
-    transform: translateY(-34%);
+/* Warm pulse when jumping to a recommended drink from a Cake Tasting Card */
+@keyframes drink-row-pulse {
+  0% {
+    background-color: rgb(250 245 236 / 0.72);
+    box-shadow: 0 0 0 2px rgb(42 26 18 / 0.25);
+  }
+  70% {
+    background-color: rgb(250 245 236 / 0.45);
+    box-shadow: 0 0 0 2px rgb(42 26 18 / 0.14);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 transparent;
   }
 }
 
-.cake-btn:focus-visible {
-  outline: 2px solid var(--color-led);
-  outline-offset: 4px;
-  border-radius: 12px;
+.drink-row--highlight {
+  animation: drink-row-pulse 2.8s ease-out forwards;
+}
+
+/* ───────── Cakes gallery & Tasting Card ───────── */
+
+@keyframes tasting-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes tasting-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.tasting-backdrop {
+  animation: tasting-fade 0.2s ease-out both;
+}
+
+.tasting-card {
+  animation: tasting-rise 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cake-tile img {
+    transition: none;
+  }
+
+  .tasting-backdrop,
+  .tasting-card,
+  .drink-row--highlight {
+    animation: none;
+  }
+
+  .drink-row--highlight {
+    background-color: rgb(250 245 236 / 0.55);
+  }
 }
 
 /* ───────── Dock ───────── */

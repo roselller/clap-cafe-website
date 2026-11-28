@@ -57,7 +57,7 @@ export function Dock() {
     <div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center pb-[max(14px,env(safe-area-inset-bottom))]">
       <nav
         aria-label="Main"
-        className="ui-chrome pointer-events-auto flex gap-3 rounded-[28px] border border-white/60 bg-milk/65 p-2.5 backdrop-blur-xl backdrop-saturate-150 sm:gap-5 sm:p-3"
+        className="ui-chrome pointer-events-auto flex gap-3 rounded-[28px] border border-white/65 bg-milk/75 p-2.5 shadow-[0_10px_30px_rgb(27_16_10/0.22)] ring-1 ring-espresso/10 backdrop-blur-xl backdrop-saturate-150 sm:gap-5 sm:p-3"
       >
         {ITEMS.map((item) => (
           <a
@@ -65,7 +65,7 @@ export function Dock() {
             href={`#${item.id}`}
             aria-label={item.label}
             aria-current={active === item.id ? "location" : undefined}
-            className="dock-link"
+            className="dock-link transition-transform active:scale-95"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection(item.id);
@@ -74,7 +74,7 @@ export function Dock() {
             onFocus={(e) => jiggle(e.currentTarget)}
           >
             <span
-              className="dock-app flex h-12 w-12 items-center justify-center rounded-[14px] sm:h-14 sm:w-14 sm:rounded-2xl"
+              className="dock-app flex h-12 w-12 items-center justify-center rounded-[14px] shadow-[0_3px_8px_rgb(0_0_0/0.16)] sm:h-14 sm:w-14 sm:rounded-2xl"
               style={{ background: item.bg }}
             >
               <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff" aria-hidden="true">
@@ -83,7 +83,7 @@ export function Dock() {
             </span>
             <span
               aria-hidden="true"
-              className={`mx-auto mt-1 block h-1 w-1 rounded-full bg-espresso transition-opacity ${active === item.id ? "opacity-100" : "opacity-0"}`}
+              className={`mx-auto mt-1.5 block h-1.5 rounded-full bg-espresso transition-all ${active === item.id ? "w-3 opacity-100" : "w-1.5 opacity-0"}`}
             />
             <span className="dock-tip" aria-hidden="true">
               {item.label}
